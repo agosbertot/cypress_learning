@@ -1,0 +1,21 @@
+{
+  "nombre": "Agostina",
+  "apellido": "Bengochea",
+  "email": "hello@cypress.io",
+  "sexo": "Female",
+  "tel": "1234567891",
+  "fecha_nacimiento": [
+    "December",
+    "1992",
+    "31"
+  ],
+  "materia": "English",
+  "hobbies": [
+    "Sports",
+    "Music"
+  ],
+  "imagen": "my_images.jpg",
+  "direccion": "Alguna direccion ficticia",
+  "estado": "NCR",
+  "ciudad": "Delhi"
+}

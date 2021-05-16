@@ -1,7 +1,8 @@
 /// <reference types="Cypress"/> 
 
-describe('Primeros casos de prueba', () => {
+describe('Unidad 1', () => {
 
+    // beforeEach se ejecuta una vez antes de cada test 
     beforeEach(() => {
         cy.visit('http://automationpractice.com/index.php')
     })
@@ -62,7 +63,7 @@ describe('Primeros casos de prueba', () => {
         cy.get('#selectProductSort').select('In stock').should('have.value', 'quatity:desc')
     })
 
-    it('Crear una compra', () => {
+    xit('Crear una compra', () => {
         cy.get('#search_query_top').type('Blouse')
         cy.get('#searchbox > .btn').click()
         cy.get('.product-container:has(.product-name[title="Blouse"]) .ajax_add_to_cart_button').click()
@@ -71,7 +72,7 @@ describe('Primeros casos de prueba', () => {
         cy.get('tr[id^="product"]').find('.price').should('contain.text', '27.00')
         cy.get('.cart_navigation > .button').click()
         cy.get('#email').type('agos@gmail.com')
-        cy.get('#passwd').type('agos535683266')
+        cy.get('#passwd').type('*******')
         cy.get('#SubmitLogin').click()
         cy.get('.cart_navigation > .button').click()
         cy.get('#cgv').check().should('be.checked')
