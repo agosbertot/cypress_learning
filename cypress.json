@@ -1,1 +1,6 @@
-{}
+{
+    "defaultCommandTimeout": 4000, 
+    "env": {
+        "url": "https://demo.opencart.com/"
+    }
+}

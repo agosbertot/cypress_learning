@@ -1,6 +1,21 @@
 /// <reference types="Cypress"/> 
 
+//Importamos clases de page object
+import AddressPage from '../support/pageObject/AddressPage'
+import AuthenticationPage from '../support/pageObject/AuthenticationPage'
+import HomePage from '../support/pageObject/HomePage'
+import PaymentPage from '../support/pageObject/PaymentPage'
+import ShippingPage from '../support/pageObject/ShippingPage'
+import ShoppingCartSummary from '../support/pageObject/ShoppingCartSummary'
+
 describe('Unidad 1', () => {
+
+    const addressPage = new AddressPage
+    const authenticationPage = new AuthenticationPage
+    const homePage = new HomePage
+    const paymentPage = new PaymentPage
+    const shippingPage = new ShippingPage
+    const shoppingCartSummaryPage = new ShoppingCartSummary
 
     // beforeEach se ejecuta una vez antes de cada test 
     beforeEach(() => {
@@ -63,23 +78,65 @@ describe('Unidad 1', () => {
         cy.get('#selectProductSort').select('In stock').should('have.value', 'quatity:desc')
     })
 
-    xit('Crear una compra', () => {
-        cy.get('#search_query_top').type('Blouse')
-        cy.get('#searchbox > .btn').click()
-        cy.get('.product-container:has(.product-name[title="Blouse"]) .ajax_add_to_cart_button').click()
-        cy.get('.button-container > .button-medium > span').click()
-        cy.get('tr[id^="product"]').find('.product-name > a').should('contain.text', 'Blouse')
-        cy.get('tr[id^="product"]').find('.price').should('contain.text', '27.00')
-        cy.get('.cart_navigation > .button').click()
-        cy.get('#email').type('agos@gmail.com')
-        cy.get('#passwd').type('*******')
-        cy.get('#SubmitLogin').click()
-        cy.get('.cart_navigation > .button').click()
-        cy.get('#cgv').check().should('be.checked')
-        cy.get('.cart_navigation > .button').click()
-        cy.get('.bankwire').click()
-        cy.get('#cart_navigation > .button').click()
-        cy.get('.cheque-indent > .dark').should('contain.text', 'Your order on My Store is complete')
+    it('Crear una compra', () => {
+
+        //La linea de arriba comentada es equivalente a la de abajo
+        //cy.get('#search_query_top').type('Blouse')
+        homePage.getSearchBoxInput().type('Blouse')
+
+        //cy.get('#searchbox > .btn').click()
+        homePage.getSearchBoxBtn().click()
+
+        //cy.get('.product-container:has(.product-name[title="Blouse"]) .ajax_add_to_cart_button').click()
+        homePage.getAddToCartElementBtn('Blouse').click()
+
+        //cy.get('.button-container > .button-medium > span').click()
+        homePage.getProceedToCheckoutBtn().click()
+
+        //cy.get('tr[id^="product"]').find('.product-name > a').should('contain.text', 'Blouse')
+        shoppingCartSummaryPage.getProductNameText().should('contain.text', 'Blouse')
+
+        //cy.get('tr[id^="product"]').find('.price').should('contain.text', '27.00')
+        shoppingCartSummaryPage.getProductPriceText().should('contain.text', '27.00')
+
+        // cy.get('.cart_navigation > .button').click()
+        shoppingCartSummaryPage.getProceedToCheckoutBtn().click()
+        
+        //cy.get('#email').type('agos@gmail.com')
+        authenticationPage.getEmailInput().type('agos@gmail.com')
+        
+        //cy.get('#passwd').type('agos535683266')
+        authenticationPage.getPasswdInput().type('agos535683266')
+        
+        //cy.get('#SubmitLogin').click()
+        authenticationPage.getSubmitLoginBtn().click()
+        
+        //cy.get('.cart_navigation > .button').click()
+        addressPage.getProceedToCheckoutBtn().click()
+        
+        //cy.get('#cgv').check().should('be.checked')
+        shippingPage.getTermsOfServiceCheckbox().check().should('be.checked')
+
+        //cy.get('.cart_navigation > .button').click()
+        shippingPage.getProceedToCheckoutBtn().click()
+        
+        // cy.get('.bankwire').click()
+        paymentPage.getPayByBankWireBtn().click()
+        
+        // cy.get('#cart_navigation > .button').click()
+        paymentPage.getConfirmMyOrderBtn().click()
+        
+        // cy.get('.cheque-indent > .dark').should('contain.text', 'Your order on My Store is complete')
+        paymentPage.getDescriptionTitleText().should('contain.text', 'Your order on My Store is complete')
     })
 
 })
+
+// Tiempo de espera IMPLICITO el valor que defino: "defaultCommandTimeout": 4000
+// aplica a todos los casos de prueba, 
+// es el tiempo que va a intentar cypress encontrar un elemento
+// Tiempo de espera implicito aplica a todo el proyecto
+// Si lo configuro distinto en cypress.json se modifica en settings - configuration (por defecto son 4 segundos)
+
+// Tiempo de espera EXPLICITO 
+// Cypress.config('defaultCommandTimeout', 15000) --> lo pongo antes del test para que aplique de ahí en adelante
