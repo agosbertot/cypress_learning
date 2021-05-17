@@ -4,7 +4,10 @@
   "description": "curso udemy cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "./node_modules/.bin/cypress open",
+    "test": "node_modules\\.bin\\cypress run",
+    "testChrome": "npm run test -- --browser chrome",
+    "testDashChrome": "npm run test -- --record --key 54b84be7-c5a6-4628-bfd8-9881c0e89f3b --browser chrome --headless"
   },
   "author": "",
   "license": "ISC",

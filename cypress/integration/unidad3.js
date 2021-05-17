@@ -6,7 +6,7 @@ describe('Unidad 3', () => {
         cy.visit(Cypress.env('url') + "/index.php")
     })
 
-    xit('Compra de celular basado en título', () => {
+    it('Compra de celular basado en título', () => {
         cy.get('.collapse a:contains("Phones & PDAs")').click()
 
         // cy.get('#content .product-layout').as('ProductosPrincipales')
@@ -80,7 +80,7 @@ describe('Unidad 3', () => {
 
     })
 
-    xit('Compra de celular basado en título', () => {
+    it('Compra de celular basado en título', () => {
         cy.get('.collapse a:contains("Phones & PDAs")').click()
         cy.fixture('arregloCarrito').then(function (datos) {
             this.datos = datos

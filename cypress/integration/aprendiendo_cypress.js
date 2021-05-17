@@ -21,7 +21,7 @@ describe('Unidad 1', () => {
     beforeEach(() => {
         cy.visit('http://automationpractice.com/index.php')
     })
-    xit('Contabilizar cantidad de elementos en la pagina principal', () => {
+    it('Contabilizar cantidad de elementos en la pagina principal', () => {
 
         //La página principal debería mostrar sólo 7 elementos, si sólo pongo .product-contain 
         //me devuelve una lista de 14 elementos que son todos los que existen 
@@ -35,7 +35,7 @@ describe('Unidad 1', () => {
         cy.get('@ProductosPrincipales').should('have.length', 7)
     })
 
-    xit('Agregar elemento Printed dress al carrito de compras', () => {
+    it('Agregar elemento Printed dress al carrito de compras', () => {
 
         cy.get('#homefeatured .product-container').as('ProductosPrincipales')
 
@@ -58,7 +58,7 @@ describe('Unidad 1', () => {
             .should('be.visible')
     })
 
-    xit('Navegando Hover', () => {
+    it('Navegando Hover', () => {
         // con invoke le cambio el valor a la tag STYLE del elemento, 
         //porque ese estilo es lo que hace que aparezca o no el modal con el submenu 
         //cuando me paro sobre el boton WOMEN 
@@ -67,13 +67,13 @@ describe('Unidad 1', () => {
         cy.get('a[title="Tops"]').should('be.visible')
     })
 
-    xit('Verificar funcionamiento Checkbox', () => {
+    it('Verificar funcionamiento Checkbox', () => {
         cy.get('.sf-menu > :nth-child(2) > .sf-with-ul').click()
         cy.get('li[class ="nomargin hiddable col-lg-6"]:has(a[href*="categories-casual_dresses"]) input').check().should('be.checked')
         cy.get('li[class ="nomargin hiddable col-lg-6"]:has(a[href*="categories-summer_dresses"]) input').should('not.be.checked')
     })
 
-    xit('Verificar Dropdown', () => {
+    it('Verificar Dropdown', () => {
         cy.get('.sf-menu > :nth-child(2) > .sf-with-ul').click()
         cy.get('#selectProductSort').select('In stock').should('have.value', 'quatity:desc')
     })
