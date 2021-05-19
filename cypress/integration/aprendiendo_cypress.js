@@ -73,7 +73,7 @@ describe('Unidad 1', () => {
         cy.get('li[class ="nomargin hiddable col-lg-6"]:has(a[href*="categories-summer_dresses"]) input').should('not.be.checked')
     })
 
-    it('Verificar Dropdown', () => {
+    xit('Verificar Dropdown', () => {
         cy.get('.sf-menu > :nth-child(2) > .sf-with-ul').click()
         cy.get('#selectProductSort').select('In stock').should('have.value', 'quatity:desc')
     })
