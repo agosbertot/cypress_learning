@@ -26,10 +26,30 @@ describe('Backend Testing', () => {
             
             expect(request.headers).to.have.property('content-type')
 
-            // verificamos que la respuesta JSON 
+            // verificamos que la respuesta JSON tengas la propiedad de name y tenga ese valor
+            expect(response && response.body).to.have.property('name', 'Using POST in cy.intercept()')
            
 
         })
+    })
+
+    it('Mock', () => {
+        let mensaje = "Este es un msj de error que creamos nosotro"
+
+        // cambiamos la respuesta de PUT comment
+        cy.intercept({
+            method: 'PUT',
+            url: "**/comments/*",
+        },{
+            statusCode: 404,
+            body:{ error: mensaje },
+            headers:{'access-control-allaw-origin':'*'},
+            delayMs: 5000,
+        }).as('putComments')
+
+        //tenemos codigo que reemplaza un comentario cuando se hace clic en el boton
+        cy.get('.network-put').click()
+        cy.wait('@putComments')
     })
 
 
